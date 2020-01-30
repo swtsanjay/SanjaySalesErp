@@ -1,0 +1,132 @@
+.bg {
+    background-color: #666;
+    /* background-image: url(../img/body-bg.png); */
+}
+
+.bg-858585 {
+    background-color: #858585;
+}
+
+.flex-m-a {
+    margin: 200px auto;
+}
+
+.h-500 {
+    height: 500px;
+}
+
+.w-360 {
+    width: 360px;
+}
+
+.b-log {
+    background-color: #858585;
+}
+
+.control-label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: #67757c;
+}
+
+.c-eee {
+    color: #eee;
+}
+
+.f-s-25 {
+    font-size: 25px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.c-danger {
+    color: #ef5350;
+}
+
+.b-danger {
+    border-color: #ef5350 !important;
+}
+
+.add-items {
+    display: none;
+}
+
+.w-5 {
+    width: 50%;
+}
+
+.select2-selection__rendered {
+    border: 1px solid gray;
+}
+
+.us {
+    box-shadow: 0 0 5px 0px #8477ca;
+}
+
+.select2-selection--single {
+    background-color: #fff;
+    border: none !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 34px !important;
+    height: 38px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 34px !important;
+}
+
+.paid {
+    color: green;
+}
+
+.open {
+    color: #9F3400;
+}
+
+.cancelled {
+    color: red;
+}
+
+.part_paid {
+    color: palegreen;
+}
+
+.invoice-no {
+    color: #337ab7;
+    cursor: pointer;
+    width: 150px;
+}
+
+.req::after {
+    content: ' *';
+    color: red;
+}
+
+.btn,
+.form-control,
+.custom-select {
+    border-radius: 0;
+}
+
+.uc {
+    text-transform: uppercase;
+}
+
+.inpt:focus{
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
