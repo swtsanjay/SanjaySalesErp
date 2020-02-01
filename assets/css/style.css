@@ -108,7 +108,8 @@
 
 .btn,
 .form-control,
-.custom-select {
+.custom-select, 
+.modal-content{
     border-radius: 0;
 }
 

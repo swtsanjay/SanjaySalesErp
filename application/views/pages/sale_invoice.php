@@ -1,28 +1,12 @@
-
 <div class="clearfix " style="margin-top: 20px">
-    <div class="float-left pdT15 " style="    padding-top: 6px;">
-        <h5 class="no-margin uc">List of Sold Invoices</h5>
-    </div>
-    <!-- <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#add_invoice"> <i class="fa fa-plus-circle"></i> Add New</button> -->
+    
 </div>
-<hr>
-
-
-<!-- <div class="row">
-    <div class="col-2">
-        <input type="text" class="form-control " placeholder=" Search by Invoice Number">
-    </div>
-    <div class="col-2">
-        <button type="submit" class="btn btn-info btn-md ">Search</button>
-    </div>
-</div>
-<div style="height: 20px"></div>
- -->
 
  <div class="form-inline d-block">
-    <form action="index.php/items/load_items" method="POST">
-        <input type="search" class="form-control " id="exampleInputPassword1" placeholder="Keywords..." name="key"value="<?php echo $key ?>">&nbsp;
-        <button type="submit" class="btn btn-info btn-md " onclick="">Search</button>
+    <form action="index.php/invoices/load_invoices" method="GET">
+        <input type="search" class="form-control " placeholder="Keywords..." name="key" value="<?php echo $_GET['key'] ?>">&nbsp;
+        <button type="submit" class="btn btn-info btn-md " onclick="">Search</button>&ensp;
+        <button type="button" class="btn btn-danger btn-md d-none " > <i class="fa fa-credit-card"></i> Record Payment</button>
         <button type="button" class="btn btn-success float-right" onclick="open_invoice_form(0)"><i class="fa fa-plus-circle"></i> Add New</button>
     </form>
 </div>
@@ -31,8 +15,9 @@
     <table class="table table-bordered table-sm table-striped table-hover">
         <thead class="thead-dark uc">
             <tr>
+                <th style="width: 40px; text-align: center; line-height: 36px;"><input type="checkbox" name="for_all" class="for_all"> </th>
                 <th style="width: 250px;">Invoice Number</th>
-                <th>Party Id</th>
+                <th>Party Name</th>
                 <th style="width: 150px;">Total Amount</th>
                 <th style="width: 150px;">Paid Amount</th>
                 <th style="width: 150px;">Status</th>
@@ -44,9 +29,10 @@
 
             <?php foreach ($dt as $r) : ?>
                 <tr>
+                    <th style="text-align: center; padding: 10px 10px;"><input type="checkbox" name="<?php echo $r['id'] ?>"> </th>
                     <td class="invoice-no"><?php echo $r['invoice_number'] ?></td>
-                    <td><?php echo $r['party_id'] ?></td>
-                    <td><?php echo $r['total_amt'] ?></td>
+                    <td class='i-name'><?php echo $r['name'] ?></td>
+                    <td><?php echo $r['grand_total'] ?></td>
                     <td><?php echo $r['paid_amt'] ?></td>
                     <?php 
                         if($r['status']=='paid')
@@ -62,8 +48,8 @@
                     <td><?php echo date("D, j M y <br> h:i A"); ?></td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <a href="user/form/<?php echo $r['id'] ?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="user/delete/<?php echo $r['id'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></a>
+                            <a href="javascript:;;" class="btn btn-sm btn-primary" onclick="open_invoice_form('<?php echo $r['id'] ?>')"><i class="fa fa-edit"></i></a>
+                            <a href="javascript:;;" class="btn btn-sm btn-danger"  onclick="delete_invoice('<?php echo $r['id'] ?>')"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </td>
                 </tr>
@@ -89,6 +75,14 @@
 <div class="modal fade1" id="party_form_modal" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content ">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="record_payment_form_modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
         </div>
     </div>
 </div>

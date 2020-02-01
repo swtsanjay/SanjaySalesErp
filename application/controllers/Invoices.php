@@ -18,21 +18,15 @@ class Invoices extends MY_Controller {
     
     function invoice_dtl($id){
         $dtl = $this->user->invoice_dtl($id);
-        // pr($dtl);
-        
-        // // foreach($dtl['parties'] as $p)
-        // //         echo $p['name'];
-           
-        // // die;
         $html = $this->load->view("pages/popups/invoice_form", $dtl, true);
-        json_data(['html' => $html, 'products'=>$dtl['products']]);
+        json_data(['html' => $html, 'products'=>$dtl['products'] ]);
     }
 
     function save_invoice(){
         $post = $this->input->post();
         $res = ['success' => false, 'errors' => [], 'msg' => 'error!'];
-        if (!$post['party']) {
-            $res['errors']['party'] = "Please select a party";
+        if (!$post['party_id']) {
+            $res['errors']['party_id'] = "Please select a party";
         }
         if (!$post['date']) {
             $res['errors']['date'] = "Please select a date";
@@ -46,29 +40,49 @@ class Invoices extends MY_Controller {
                 $cost += $post['cost'][$key];
             }
         }
-        // $post['total'] = $total_amt;
-        // pr($post);
 
+        
+        if ( !$res['errors'] ) {
+            $d = filter_value($post, ['id', 'party_id','invoice_number', 'total_amt', 'total_disc', 'total_gst', 'grand_total', 'total_cost', 'notes']);
+            $d['client_id'] = CLIENT_ID;
+            $d['created_by'] = $_SESSION['dtl'][0]['id'];
+            $inv_id = $d['id'];
+            if (!$d['id']) {
+                $d['created'] = date('Y-m-d H:i:s');
+            }
+            if ($invoice_id = $this->user->save_invoice($d) ) {
+                $d=[];
+                foreach($post['item_id'] as $key => $i){
+                    $d[$key]['item_id'] = $i;
+                    $d[$key]['cost'] = $post['cost'][$key];
+                    $d[$key]['rate'] = $post['rate'][$key];
+                    $d[$key]['qnty'] = $post['qnty'][$key];
+                    $d[$key]['disc'] = $post['disc'][$key];
+                    $d[$key][ 'gst'] = $post[ 'gst'][$key];
+                    $d[$key]['final_amt'] = $post['final_amt'][$key];
+                    $d[$key]['invoice_id'] = $invoice_id;
+                }
+                $this->user->save_invoice_item($d, $invoice_id);
+                $res['success'] = true;
+                $res['msg'] = "Invoice saved successfully";
+                $res['d'] = $d;
+            }
+        } else {
+            $res['msg'] = implode("\n", array_values($res['errors']));
+        }
+        $res['inv_id'] = $inv_id;
+        json_data($res);
+    }
 
+    function delete_invoice($id) {
+        $this->user->delete_invoice($id);
+        json_data(['msg' => 'Item deleted successfully']);
+    }
 
-        // if ( !$res['errors'] ) {
-        //     $d = filter_value($post, ['party','invoice_no', 'total_amt', 'cost']);
-        //     $d['client_id'] = CLIENT_ID;
-        //     $d['created_by'] = $_SESSION['dtl'][0]['id'];
-        //     if (!$d['id']) {
-        //         $d['created'] = date('Y-m-d H:i:s');
-        //     }
-        //     // if ($this->user->save_invoice($d)) {
-        //     //     $res['success'] = true;
-        //     //     $res['msg'] = "Party saved successfully";
-        //     // }
-        // } else {
-        //     $res['msg'] = implode("\n", array_values($res['errors']));
-        // }
-        // die;
-
-        // $res['msg'] = implode("\n", array_values($res['errors']));
-        // json_data($res);
+    function get_payment_info(){
+        $dtl = [];
+        $html = $this->load->view("pages/popups/record_payment_form", $dtl, true);
+        json_data(['html' => $html, 'products'=>$dtl['products'] ]);
     }
 
 	function layout($page, $data){

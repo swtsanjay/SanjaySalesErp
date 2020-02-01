@@ -11,7 +11,7 @@
 
 <div class="form-inline d-block">
     <form action="index.php/parties/load_parties">
-        <input type="search" class="form-control " id="exampleInputPassword1" placeholder="Keywords..." name="key" value="<?php echo $qs['key']?>">&nbsp;
+        <input type="search" class="form-control " placeholder="Keywords..." name="key" value="<?php echo $qs['key']?>">&nbsp;
         <select class="form-control inpt-lg " name="type">
             <option value="">Type (All)</option>
             <option value="customer" <?php if ($qs['type'] == 'customer') echo 'selected' ?>>CUSTOMER</option>

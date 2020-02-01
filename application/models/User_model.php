@@ -14,11 +14,18 @@ class User_model extends CI_Model{
     }
 
     function list_invoices(){
-        $sql = "SELECT * FROM invoices WHERE created_by = '" .$_SESSION['dtl'][0]['id']. "'" ;
+        $get = $this->input->get();
+        $cns = '';
+        if($get){
+            $cns = " AND  parties.name LIKE  '%{$get['key']}%'";
+            $rs['key'] = $get['key'];
+        }
+        $sql = "select 
+                parties.name,   invoices.*  
+                from invoices join parties 
+                on invoices.party_id = parties.id   
+                WHERE created_by = '" .$_SESSION['dtl'][0]['id']. "'". $cns ;
         $rs=$this->db->query( $sql )->result_array();
-        // $rs['sql'] = $sql;
-        // pr($rs);
-        // pr($_SESSION);
         return $rs;
     }
 
@@ -96,6 +103,21 @@ class User_model extends CI_Model{
         return $success;
     }
 
+    function get_invoivce_items($id){
+        $sql = "select 
+                item.name, item.item_code code, item.uom, item.id item_id,
+                invoice.*
+                from invoice_items invoice join items item on invoice.item_id = item.id
+                where invoice.invoice_id = $id";
+        $rs = $this->db->get_where('invoices', ['id' => $id] )->row_array();
+        $rs['invoice_items'] = $this->db->query( $sql )->result_array();
+        $rs['sql'] = $sql;
+
+        $rs['created']=date("Y-m-d", strtotime($rs['created']));
+
+        return $rs;
+    }
+
     function invoice_dtl($id){
         $rs = $this->db->get_where('invoices', ['id'=>$id])->row_array();
         $parties = $this->db->get_where('parties', ['client_id'=>CLIENT_ID] )->result_array();
@@ -106,11 +128,42 @@ class User_model extends CI_Model{
         $data['e_i'] = $rs;
         $data['parties'] = $parties;
         $data['products'] = $products;
+        $data['invoice_dtl'] = $this->get_invoivce_items($id);
         return $data;
     }
 
-    function save_invoice(){
-        
+    
+
+    function save_invoice($data){
+        if($data['id']){
+            $this->db->where('id', $data['id'])->update('invoices', $data);
+            $success = $data['id'];
+        }else{
+            $this->db->insert('invoices', $data);
+            $success = $this->db->insert_id();
+        }
+        return $success;
+    }
+
+    
+
+    function save_invoice_item($data, $inv_id){
+        if($inv_id){
+            $sql = "DELETE FROM invoice_items WHERE invoice_id = '" .$inv_id. "'";
+            $this->db->query( $sql );
+        }
+        foreach($data as $i){
+            $this->db->insert('invoice_items', $i);
+        }
+    }
+
+    function delete_invoice($id){
+        $sql = "DELETE FROM invoice_items WHERE invoice_id = '" .$id. "'";
+        $this->db->query( $sql );
+        $sql = "DELETE FROM invoices WHERE id = '" .$id. "'";
+        $this->db->query( $sql );
+        $success=$this->db->affected_rows();
+        return $success;
     }
 }
 
