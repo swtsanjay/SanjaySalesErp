@@ -92,16 +92,20 @@ function open_invoice_form(id){
         url: API_URL + 'invoices/invoice_dtl/' + id,
         dataType: 'JSON',    
         success: function(res) {
-            // alert(9);
             items=res.products;
+            type = '';
             $("#invoice_form_modal .modal-content").html(res.html);
             $("#invoice_form_modal").modal();
             slct2();
-            // page_reload =true;
+            $('a[data-toggle=tab]').each(function(){
+                if($(this).hasClass('active')){
+                    type = $(this).attr('type');
+                    $('input[name=type_of_invoice]').val(type);
+                }
+            });
         }
     });
 }
-
 
 function save_invoice() {
     calc_total();
@@ -169,7 +173,7 @@ function slct2(){
         placeholder: "Party",
     });
     $(".select-item").select2({
-        placeholder: "Select item to add"
+        placeholder: "Select item to add",
     });
     $(".fa.fa-trash-o.btn-sm.btn-danger").click(function() {
         $(this).parent().parent().remove();
@@ -252,6 +256,8 @@ function slct2(){
         }
     });
 
+    
+    
 }
 
 function calc_paying_amt(){
@@ -259,6 +265,7 @@ function calc_paying_amt(){
     $('input[name="payingAMT[]"]').each(function(){
         pamt += $(this).val()*1;
     });
+    $("input[name=type_of_invoice]").val(type);
     $('input[name=totalPayingAMT]').val(pamt);
 }
 
@@ -281,6 +288,7 @@ function save_payment(){
 $(document).ready(function(){ 
     slct2();
 }); 
+
 function calc_total(){
     disc = 0; gst=0;    amt=0;  cost=0; rate=0;
     $('.disc').each(function(){

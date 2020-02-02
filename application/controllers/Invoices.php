@@ -13,6 +13,7 @@ class Invoices extends MY_Controller {
 	function load_invoices(){
         $rs = $this->user->list_invoices();
         $data['dt'] = $rs;
+        // pr($data['dt']);
         $this->layout('pages/list_invoices', $data);
     }
     
@@ -41,9 +42,13 @@ class Invoices extends MY_Controller {
             }
         }
 
-        
+        if($post['type_of_invoice']=='sale'){
+            $post['type'] = 1;
+        }else{
+            $post['type'] = 2;
+        }
         if ( !$res['errors'] ) {
-            $d = filter_value($post, ['id', 'party_id','invoice_number', 'total_amt', 'total_disc', 'total_gst', 'grand_total', 'total_cost', 'notes']);
+            $d = filter_value($post, ['id', 'party_id','invoice_number', 'total_amt', 'total_disc', 'total_gst', 'grand_total', 'total_cost', 'notes', 'type']);
             $d['client_id'] = CLIENT_ID;
             $d['created_by'] = $_SESSION['dtl'][0]['id'];
             $inv_id = $d['id'];

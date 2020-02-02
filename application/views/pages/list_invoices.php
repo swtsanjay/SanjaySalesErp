@@ -2,8 +2,8 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active " data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Sale Invoices</a>
-        <a class="nav-item nav-link " data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Purchase Invoices</a>
+        <a class="nav-item nav-link active " data-toggle="tab" id="inv_sale" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" type="sale">Sale Invoices</a>
+        <a class="nav-item nav-link " data-toggle="tab" id="inv_purchase" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" type="purchase">Purchase Invoices</a>
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -14,6 +14,34 @@
         <?php $this->load->view('pages/purchase_invoice') ?>
     </div>
 </div>
-<?php
-    pr($dtl);
-?>
+
+
+<div class="modal fade" id="invoice_form_modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content ">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade1" id="item_form_modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade1" id="party_form_modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="record_payment_form_modal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

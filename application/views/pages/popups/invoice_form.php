@@ -6,19 +6,19 @@
 
     <form id="invoice_form">
         <input type="hidden" value="<?php echo $invoice_dtl['id'] ?>" name="id">
+        <input type="hidden" value="" name="type_of_invoice">
         <label class="">Party</label>
         <div class="form-group row ">
-            <div class="col-sm-8 ">
+            <div class="col-sm-8">
                 <select class="form-control select-party" name="party_id" style="width: 100% !important;">
                     <option value="">Select</option>
                     <?php foreach ($parties as $p) : ?>
-                        <option value=" <?php echo $p['id']; ?> " <?php if($invoice_dtl['party_id'] == $p['id']) echo 'selected' ?> > <?php echo $p['name']; ?> </option>
+                        <option value="<?php echo $p['id']; ?>" <?php if($invoice_dtl['party_id'] == $p['id']) echo 'selected' ?> > <?php echo $p['name']; ?> </option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <label style="-ms-flex: 0 0 4%;flex: 0 0 4%;max-width: 4%;"></label>
             <button type="button" class="col-sm-3 btn btn-info" onclick="open_party_form(0)"><i class="fa fa-plus-circle"></i> New Party</button>
-
         </div>
 
         <div style="height: 20px;"></div>
@@ -101,7 +101,7 @@
         <div class="form-group row pb-2">
             <div class="col-sm-8 ">
                 <select class="form-control select-item" name="states" id="item_id" style="width: 100% !important;" onchange="add_table_item()">
-                    <option></option>
+                    <option value="">Select</option>
                     <?php foreach ($products as $p) : ?>
                         <option value="<?php echo $p['id']; ?>"> <?php echo $p['name']; ?> </option>
                     <?php endforeach; ?>
