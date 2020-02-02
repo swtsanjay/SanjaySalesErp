@@ -22,4 +22,8 @@ function json_data($res){
 	die(json_encode($res));
 }
 
+
+function zero_format_no($no, $n=5){
+	return str_pad($no, $n, '0', STR_PAD_LEFT);
+}
 //EOF

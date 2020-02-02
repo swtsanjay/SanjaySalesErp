@@ -165,6 +165,46 @@ class User_model extends CI_Model{
         $success=$this->db->affected_rows();
         return $success;
     }
+
+    function get_payment_info($id){
+        // $rs = [];
+        foreach($id as $key => $i){
+            $rs[$key] = $this->db->get_where('invoices', ['id' => $i] )->result_array();
+        }
+        return $rs;
+    }
+
+    function save_payment($basic, $data){
+        $this->db->insert('receipts', $basic);
+        $success = $this->db->insert_id();
+        $d = zero_format_no($success, 4);
+        $basic['receipt_number'] = "R".$d;
+        $basic['id'] = $success;
+        $this->db->where('id', $success)->update('receipts', $basic);
+        $d = [];
+        foreach($data as $i){
+            $d['receipt_id'] = $success;
+            $d['invoice_id'] = $i['id'];
+            $d['amt'] = $i['amt'];
+            $this->db->insert('receipt_items', $d);
+
+            $rs = $this->db->get_where('invoices', ['id' => $i['id']] )->result_array();
+            $paid_amt = $rs[0]['paid_amt']+$d['amt'];
+            if( $paid_amt >= $rs[0]['grand_total']){
+                $status = 3;
+            }else if($paid_amt <=0 ){
+                $status = 1;
+            }else {
+                $status = 2;
+            }
+            $sql ="UPDATE invoices SET paid_amt = '".$paid_amt."', status = '$status' WHERE id = '".$d['invoice_id']."'";
+            // pr($sql);
+            $this->db->query( $sql );
+        }
+        $success=$this->db->affected_rows();
+        // $success = $this->db->insert_id();
+        return true;
+    }
 }
 
 // EOF

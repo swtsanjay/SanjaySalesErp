@@ -223,12 +223,12 @@ function slct2(){
     });
 
     $('.btn.btn-danger.btn-md').click(function(){
-        arr=[];
+        arr=[]; id = '';
         $('input[type=checkbox]').each(function(){
             if( $(this).prop( "checked" ) ){
                 name = $(this).parent().parent().find('.i-name').html();
                 arr.push(name);
-                console.log(name);
+                id +=  'id' + $(this).attr('name') ;
             }
         });
         abc = true;
@@ -239,9 +239,9 @@ function slct2(){
         });
         if(abc){
             $.ajax({
-                url: API_URL + 'invoices/get_payment_info/' ,
+                url: API_URL + 'invoices/get_payment_info/' + id,
                 dataType: 'JSON',
-                success: function(res) {000000
+                success: function(res) {
                     $("#record_payment_form_modal .modal-content").html(res.html);
                     $("#record_payment_form_modal").modal();
                 }
@@ -252,6 +252,31 @@ function slct2(){
         }
     });
 
+}
+
+function calc_paying_amt(){
+    pamt = 0;
+    $('input[name="payingAMT[]"]').each(function(){
+        pamt += $(this).val()*1;
+    });
+    $('input[name=totalPayingAMT]').val(pamt);
+}
+
+function save_payment(){
+    calc_paying_amt();
+    $.ajax({
+        url: API_URL + 'invoices/save_payment/',
+        type: 'POST',
+        data: $('#record_payment').serialize(),
+        dataType: 'JSON',
+        success: function(res) {
+            alert(res.msg);
+            if (res.success) {
+                $('#record_payment_form_modal').modal('hide');
+                location.reload();
+            }
+        }
+    });
 }
 $(document).ready(function(){ 
     slct2();

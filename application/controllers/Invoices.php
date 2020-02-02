@@ -79,10 +79,33 @@ class Invoices extends MY_Controller {
         json_data(['msg' => 'Item deleted successfully']);
     }
 
-    function get_payment_info(){
-        $dtl = [];
+    function get_payment_info($id){
+        $id = explode("id", $id);
+        $dtl['data'] = $this->user->get_payment_info($id);
         $html = $this->load->view("pages/popups/record_payment_form", $dtl, true);
         json_data(['html' => $html, 'products'=>$dtl['products'] ]);
+    }
+
+    function save_payment(){
+        $post = $this->input->post();
+        $p_info['client_id'] = $post['client_id'];
+        $p_info['party_id'] = $post['party_id'];
+        $p_info['amt'] = $post['totalPayingAMT'];
+        $p_info['created'] = date('Y-m-d H:i:s');
+        $d = [];
+        foreach($post['id'] as $key=> $i){
+            $d[$key]['id'] = $i;
+            $d[$key]['amt'] = $post['payingAMT'][$key];
+        }
+
+        // pr($p_info);
+        // pr($post);
+        $res = ['success' => false, 'errors' => [], 'msg' => 'error!'];
+        if($this->user->save_payment($p_info, $d)){
+            $res['success'] = true;
+            $res['msg'] = "Payment recorded successfully";
+        }
+        json_data($res);
     }
 
 	function layout($page, $data){
