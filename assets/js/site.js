@@ -265,12 +265,18 @@ function calc_paying_amt(){
     $('input[name="payingAMT[]"]').each(function(){
         pamt += $(this).val()*1;
     });
-    $("input[name=type_of_invoice]").val(type);
     $('input[name=totalPayingAMT]').val(pamt);
 }
 
 function save_payment(){
     calc_paying_amt();
+    $('.nav-item.nav-link').each(function(){
+        if( $(this).hasClass('active') ){
+            if($(this).attr('id') == 'inv_purchase'){
+                $('#payment_type').val('2');
+            }
+        }
+    });
     $.ajax({
         url: API_URL + 'invoices/save_payment/',
         type: 'POST',

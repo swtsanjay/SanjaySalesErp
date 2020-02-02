@@ -22,7 +22,7 @@
                 <a class="nav-link" href="index.php/items/load_items">Items</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php/receipts_nd_payments/">Receipts</a>
+                <a class="nav-link" href="index.php/receipts_nd_payments/">Receipts & Payments</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php/user/stock">Stock</a>

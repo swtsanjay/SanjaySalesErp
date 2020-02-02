@@ -97,6 +97,8 @@ class Invoices extends MY_Controller {
         $p_info['party_id'] = $post['party_id'];
         $p_info['amt'] = $post['totalPayingAMT'];
         $p_info['created'] = date('Y-m-d H:i:s');
+        $p_info['type'] = ($post['type']?2:1);
+
         $d = [];
         foreach($post['id'] as $key=> $i){
             $d[$key]['id'] = $i;
@@ -118,4 +120,3 @@ class Invoices extends MY_Controller {
 		$this->load->view('layout', $data);
 	}
 }
-

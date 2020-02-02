@@ -205,6 +205,16 @@ class User_model extends CI_Model{
         // $success = $this->db->insert_id();
         return true;
     }
+
+    function list_receipts() {
+        $sql = "select 
+                parties.name,   receipts.*, DATE_FORMAT(receipts.created, '%a, %e %b %y %h:%i %p') created
+                from receipts join parties 
+                on receipts.party_id = parties.id
+                where receipts.client_id = '" .CLIENT_ID. "'" ;
+        $rs=$this->db->query( $sql )->result_array();
+        return $rs;
+    }
 }
 
 // EOF

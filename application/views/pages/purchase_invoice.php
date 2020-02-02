@@ -32,7 +32,6 @@
             </tr>
         </thead>
         <tbody>
-
             <?php foreach ($dt as $r) : ?>
                 <?php if ($r['type'] == 'purchase') : ?>
                     <tr>

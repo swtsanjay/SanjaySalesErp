@@ -12,7 +12,8 @@ class Receipts_nd_payments extends MY_Controller
     }
 
     function index(){
-        $data['dt'] = [];
+        $rs = $this->user->list_receipts();
+        $data['dt'] = $rs;
         $this->layout('pages/receipts_nd_payments', $data);
     }
     

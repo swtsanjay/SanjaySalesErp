@@ -7,10 +7,10 @@
     <form id="record_payment">
         <?php unset($data[0]) ?>
         <?php //pr($data) ?>
+        <input type="hidden" value="" name="type" id="payment_type">
         <input type="hidden" value="<?php echo $data[1][0]['client_id'] ?>" name="client_id">
         <input type="hidden" value="<?php echo $data[1][0]['party_id'] ?>" name="party_id">
         <div style="line-height: 34px;">
-            <!-- <div class="float-left">Party</div> -->
             <div class="float-right"> <input type="date" class="form-control bg-light" name="date" value="<?php echo date('Y-m-d') ?>"> </div>
             <div class="float-right">Date: &emsp;</div>
             <div style="clear: both; margin-bottom: 20px;"></div>
