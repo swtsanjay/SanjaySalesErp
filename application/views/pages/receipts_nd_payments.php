@@ -2,8 +2,8 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active " data-toggle="tab" href="#nav-receipts" role="tab" aria-controls="nav-receipts" aria-selected="true" type="sale">Receipts</a>
-        <a class="nav-item nav-link " data-toggle="tab" href="#nav-payments" role="tab" aria-controls="nav-payments" aria-selected="false" type="purchase">Payments</a>
+        <a class="nav-item nav-link active " data-toggle="tab" href="#nav-receipts" role="tab" aria-controls="nav-receipts" aria-selected="true" id="inv_receipt">Receipts</a>
+        <a class="nav-item nav-link " data-toggle="tab" href="#nav-payments" role="tab" aria-controls="nav-payments" aria-selected="false" id="inv_payment">Payments</a>
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">

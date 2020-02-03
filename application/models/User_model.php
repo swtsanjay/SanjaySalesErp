@@ -207,13 +207,35 @@ class User_model extends CI_Model{
     }
 
     function list_receipts() {
+        $get = $this->input->get();
+        $cnd = '';
+        if($get['key']){
+            $cnd = " AND receipt_number LIKE '%{$get['key']}%'";
+            // pr($cnd);
+        }
         $sql = "select 
                 parties.name,   receipts.*, DATE_FORMAT(receipts.created, '%a, %e %b %y %h:%i %p') created
                 from receipts join parties 
                 on receipts.party_id = parties.id
-                where receipts.client_id = '" .CLIENT_ID. "'" ;
+                where receipts.client_id = '" .CLIENT_ID. "'" .$cnd ;
+
         $rs=$this->db->query( $sql )->result_array();
+        // $rs['sql'] = $sql;
         return $rs;
+    }
+
+    function delete_receipt_payment($id){
+        $rs = $this->db->get_where('receipt_items', ['receipt_id' => $id] )->result_array();
+        foreach($rs as $i){
+            $sql = "update invoices set paid_amt = paid_amt - '{$i['amt']}' where id = '{$i['invoice_id']}'";
+            $this->db->query($sql);
+            $sql = "DELETE FROM receipt_items WHERE id = '{$i['id']}'";
+            $this->db->query($sql);
+        }
+        $sql = "DELETE FROM receipts WHERE id = '$id'";
+        $this->db->query($sql);
+        $success=$this->db->affected_rows();
+        return $success;
     }
 }
 

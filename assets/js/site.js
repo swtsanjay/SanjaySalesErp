@@ -135,6 +135,17 @@ function delete_invoice(id){
     });
 }
 
+function delete_receipt_payment(id){
+    $.ajax({
+        url: API_URL + 'receipts_nd_payments/delete_receipt_payment/' + id,
+        dataType: 'JSON',
+        success: function(res) {
+            alert(res.msg);
+            location.reload();
+        }
+    });
+}
+
 /** \ */
 
 $(function() {

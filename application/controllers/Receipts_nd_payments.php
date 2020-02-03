@@ -16,7 +16,18 @@ class Receipts_nd_payments extends MY_Controller
         $data['dt'] = $rs;
         $this->layout('pages/receipts_nd_payments', $data);
     }
-    
+
+    function delete_receipt_payment($id){
+        $msg = "";
+        if($this->user->delete_receipt_payment($id)){
+            $msg ="Deleted Succesfully";
+        }
+        else{
+            $msg= "Error in deleting";
+        }
+        json_data(['msg' => $msg]);
+    }
+
     function layout($page, $data){
         $data['page'] = $page;
         $this->load->view('layout', $data);
