@@ -433,49 +433,46 @@ am4core.ready(function () {
     var chart = am4core.create("chartdiv", am4charts.XYChart);
 
     chart.data = [{
-        "country": "USA",
+        "month": "January",
         "visits": 2025
     }, {
-        "country": "China",
+        "month": "Fabruray",
         "visits": 1882
     }, {
-        "country": "Japan",
+        "month": "March",
         "visits": 1809
     }, {
-        "country": "Germany",
+        "month": "April",
         "visits": 1322
     }, {
-        "country": "UK",
+        "month": "May",
         "visits": 1122
     }, {
-        "country": "France",
+        "month": "June",
         "visits": 1114
     }, {
-        "country": "India",
+        "month": "July",
         "visits": 984
     }, {
-        "country": "Spain",
+        "month": "August",
         "visits": 711
     }, {
-        "country": "Netherlands",
+        "month": "September",
         "visits": 665
     }, {
-        "country": "Russia",
+        "month": "October",
         "visits": 1000
     }, {
-        "country": "South Korea",
-        "visits": 443
+        "month": "November",
+        "visits": 4430
     }, {
-        "country": "Canada",
+        "month": "December",
         "visits": 441
-    }, {
-        "country": "Brazil",
-        "visits": 395
     }];
 
 
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "country";
+    categoryAxis.dataFields.category = "month";
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.renderer.minGridDistance = 30;
 
@@ -491,7 +488,7 @@ am4core.ready(function () {
     // Create series
     var series = chart.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = "visits";
-    series.dataFields.categoryX = "country";
+    series.dataFields.categoryX = "month";
     series.name = "Visits";
     series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
     series.columns.template.fillOpacity = .8;

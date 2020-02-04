@@ -255,7 +255,7 @@ class User_model extends CI_Model{
     }
 
     function dashboard_year(){
-        $sql = "select DATE_FORMAT(min(created), '%Y') min, DATE_FORMAT(max(created), '%Y') max from invoices";
+        $sql = "select DATE_FORMAT(min(created), '%Y') min, DATE_FORMAT(max(created), '%Y') max from invoices WHERE client_id = '".CLIENT_ID."'";
         $rs = $this->db->query($sql)->row_array();
         $i = [];
         // $rs['min'] = 2002;
@@ -266,6 +266,30 @@ class User_model extends CI_Model{
             $rs['min'] = $rs['min']+1;
         }
         return $i;
+    }
+
+    function dashboard_user(){
+        $sql = "SELECT id, user_name FROM users WHERE client_id = '".CLIENT_ID."'";
+        $rs = $this->db->query($sql)->result_array();
+        $i[''] = 'All';
+        foreach($rs as $r){
+            $i[$r['id']] = $r['user_name'];
+        }
+        return $i;
+    }
+
+    function dashboard_party(){
+        $sql = "SELECT id, name FROM parties WHERE client_id = '".CLIENT_ID."' AND type = 'customer'";
+        $rs = $this->db->query($sql)->result_array();
+        $i[''] = 'All';
+        foreach($rs as $r){
+            $i[$r['id']] = $r['name'];
+        }
+        return $i;
+    }
+
+    function sales_report(){
+        $sql = "select DATE_FORMAT(created, '%M') month, count(*) from invoices group by month";
     }
 
 }

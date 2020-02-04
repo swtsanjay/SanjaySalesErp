@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-    <a class="navbar-brand" href="index.php/user/dashboard">
+    <a class="navbar-brand" href="index.php/dashboard">
         <img src="assets/img/bootstrap-solid.svg" width="30" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

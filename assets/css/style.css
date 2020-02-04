@@ -140,6 +140,7 @@ input[type=number] {
 .chart-bx{
     /* padding: 20px; */
     border: 1px solid #ddd;
+    margin-top: 40px;
 }
 
 .chart-bx-head{
