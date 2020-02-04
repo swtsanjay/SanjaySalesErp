@@ -29,6 +29,10 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script> -->
     <link href="assets/css/select2.min.css" rel="stylesheet">
     <script src="assets/js/select2.min.js"></script>
+    
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="assets/js/site.js?<?php echo time()?>"></script>
 </body>
 
