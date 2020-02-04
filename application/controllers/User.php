@@ -15,10 +15,10 @@ class User extends MY_Controller {
 		
 	}
 
-	function dashboard(){
-		$data['dt'] = '';
-		$this->layout('pages/dashboard', $data);
-	}	
+	// function dashboard(){
+	// 	$data['dt'] = '';
+	// 	$this->layout('pages/dashboard', $data);
+	// }	
 
 	function invoices(){
 		$rs = $this->user->list_invoices();

@@ -254,6 +254,19 @@ class User_model extends CI_Model{
 
     }
 
+    function dashboard_year(){
+        $sql = "select DATE_FORMAT(min(created), '%Y') min, DATE_FORMAT(max(created), '%Y') max from invoices";
+        $rs = $this->db->query($sql)->row_array();
+        $i = [];
+        // $rs['min'] = 2002;
+        $i['selected'] = date("Y");
+        while($rs['min']<=$rs['max']){
+            if($i['selected'] != $rs['min'])
+                $i[$rs['min']] = $rs['min'];
+            $rs['min'] = $rs['min']+1;
+        }
+        return $i;
+    }
 
 }
 

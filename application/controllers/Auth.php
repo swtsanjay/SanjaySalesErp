@@ -11,7 +11,7 @@ class Auth extends CI_Controller {
 	public function index()	{
         $post=$this->input->post();
         if( $_SESSION['dtl'] ){
-            redirect(URL.'user/dashboard');
+            redirect(URL.'/dashboard');
         }
 		if($post){
 			
@@ -29,7 +29,7 @@ class Auth extends CI_Controller {
 					$data['pass_error'] = "Password didn't match";
 				}else{
 					$this->session->set_userdata(['dtl'=>$res ]);
-					redirect(URL.'user/dashboard');
+					redirect(URL.'/dashboard');
 				}
 			}
 			

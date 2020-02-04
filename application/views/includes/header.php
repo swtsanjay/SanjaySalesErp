@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index.php/user/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php/dashboard">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php/invoices/load_invoices">Invoices & Bills</a>
@@ -22,7 +22,7 @@
                 <a class="nav-link" href="index.php/items/load_items">Items</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php/receipts_nd_payments/">Receipts & Payments</a>
+                <a class="nav-link" href="index.php/receipts_nd_payments">Receipts & Payments</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php/user/stock">Stock</a>
