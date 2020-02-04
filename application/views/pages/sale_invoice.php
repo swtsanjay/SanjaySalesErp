@@ -37,7 +37,7 @@
                 <?php if ($r['type'] == 'sale') : ?>
                     <tr>
                         <th style="text-align: center; padding: 10px 10px;"><input type="checkbox" name="<?php echo $r['id'] ?>"> </th>
-                        <td class="invoice-no"><?php echo $r['invoice_number'] ?></td>
+                        <td class="invoice-no" onclick="invoice_dtl(<?php echo $r['id'] ?>)"><?php echo $r['invoice_number'] ?></td>
                         <td class='i-name'><?php echo $r['name'] ?></td>
                         <td><?php echo $r['grand_total'] ?></td>
                         <td><?php echo $r['paid_amt'] ?></td>

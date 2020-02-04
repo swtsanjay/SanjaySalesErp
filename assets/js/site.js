@@ -125,27 +125,74 @@ function save_invoice() {
 }
 
 function delete_invoice(id){
-    $.ajax({
-        url: API_URL + 'invoices/delete_invoice/' + id,
-        dataType: 'JSON',
+    if (confirm("Are you sure to delete this invoice!")) {
+        $.ajax({
+            url: API_URL + 'invoices/delete_invoice/' + id,
+            dataType: 'JSON',
+                success: function(res) {
+                    alert(res.msg);
+                    location.reload();
+                }
+        });
+    }
+}
+
+function delete_receipt_payment(id){
+    if (confirm("Are you sure to delete this payment!")) {
+        $.ajax({
+            url: API_URL + 'receipts_nd_payments/delete_receipt_payment/' + id,
+            dataType: 'JSON',
             success: function(res) {
                 alert(res.msg);
                 location.reload();
             }
-    });
+        });
+    }
 }
 
-function delete_receipt_payment(id){
+
+function receipt_dtl(id){
     $.ajax({
-        url: API_URL + 'receipts_nd_payments/delete_receipt_payment/' + id,
-        dataType: 'JSON',
+        url: API_URL + 'receipts_nd_payments/receipt_dtl/' + id,
+        dataType: 'JSON',    
         success: function(res) {
-            alert(res.msg);
-            location.reload();
+            items=res.products;
+            type = '';
+            $("#receipt_dtl_modal .modal-content").html(res.html);
+            $("#receipt_dtl_modal").modal();
+            receipt_dtl_total = 0.00;
+            $('.receipt_dtl_amt').each(function(){
+                receipt_dtl_total += $(this).html()*1;
+            });
+            $('#receipt_dtl_total').html("Total: &emsp; "+receipt_dtl_total.toFixed(2));
         }
     });
 }
 
+
+
+function invoice_dtl(id){
+    $.ajax({
+        url: API_URL + 'invoices/invoice_dtl_show/' + id,
+        dataType: 'JSON',    
+        success: function(res) {
+            items=res.products;
+            type = '';
+            $("#invoice_dtl_model .modal-content").html(res.html);
+            $("#invoice_dtl_model").modal();
+            invoice_dtl_tdisc = 0.00;    invoice_dtl_tgst=0;  invoice_dtl_tamt=0;
+            $('.invoice_dtl_amts').each(function(){
+                invoice_dtl_tdisc += $(this).find('#invoice_dtl_disc').html()*1;
+                invoice_dtl_tgst += $(this).find('#invoice_dtl_gst').html()*1;
+                invoice_dtl_tamt += $(this).find('#invoice_dtl_amt').html()*1;
+            });
+            $('#invoice_dtl_tdisc').html(invoice_dtl_tdisc.toFixed(2));
+            $('#invoice_dtl_tgst').html(invoice_dtl_tgst.toFixed(2));
+            $('#invoice_dtl_tamt').html(invoice_dtl_tamt.toFixed(2));
+            $('#invoice_dtl_gtotal').html( (invoice_dtl_tdisc+invoice_dtl_tgst+invoice_dtl_tamt).toFixed(2) );
+        }
+    });
+}
 /** \ */
 
 $(function() {

@@ -13,7 +13,7 @@
                 <a class="nav-link" href="index.php/user/dashboard">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php/invoices/load_invoices">Invoices</a>
+                <a class="nav-link" href="index.php/invoices/load_invoices">Invoices & Bills</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php/parties/load_parties">Parties</a>

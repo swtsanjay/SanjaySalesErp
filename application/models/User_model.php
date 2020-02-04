@@ -106,14 +106,17 @@ class User_model extends CI_Model{
     function get_invoivce_items($id){
         $sql = "select 
                 item.name, item.item_code code, item.uom, item.id item_id,
-                invoice.*
+                invoice.* 
                 from invoice_items invoice join items item on invoice.item_id = item.id
                 where invoice.invoice_id = $id";
         $rs = $this->db->get_where('invoices', ['id' => $id] )->row_array();
         $rs['invoice_items'] = $this->db->query( $sql )->result_array();
-        $rs['sql'] = $sql;
+        // $rs['sql'] = $sql;
 
         $rs['created']=date("Y-m-d", strtotime($rs['created']));
+        $rs['i_date']=date("D, j M y", strtotime($rs['created']));
+        $sql = "SELECT name FROM parties WHERE id = '{$rs['party_id']}'";
+        $rs['party'] = $this->db->query( $sql )->row_array();
 
         return $rs;
     }
@@ -237,6 +240,21 @@ class User_model extends CI_Model{
         $success=$this->db->affected_rows();
         return $success;
     }
+
+    function receipt_dtl($id){
+        $rs['receipt_items'] = $this->db->get_where('receipt_items', ['receipt_id' => $id] )->result_array();
+
+        $sql = "select 
+                parties.name,   receipts.*, DATE_FORMAT(receipts.created, '%a, %e %b %y') created
+                from receipts join parties 
+                on receipts.party_id = parties.id
+                where receipts.id = $id ";
+        $rs['receipts'] = $this->db->query($sql)->row_array();
+        return $rs;
+
+    }
+
+
 }
 
 // EOF

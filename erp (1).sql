@@ -50,7 +50,7 @@ CREATE TABLE `invoices` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `invoices` (`id`, `client_id`, `created_by`, `type`, `party_id`, `invoice_number`, `total_amt`, `total_disc`, `total_gst`, `grand_total`, `total_cost`, `paid_amt`, `status`, `notes`, `created`) VALUES
-(53,	1,	1,	'sale',	2,	'INVOICE50',	1440.00,	20.00,	242.80,	1662.80,	1070.00,	1563.00,	'partial_paid',	'',	'2020-02-01 12:31:12'),
+(53,	1,	1,	'sale',	2,	'INVOICE50',	1440.00,	20.00,	242.80,	1662.80,	1070.00,	1563.00,	'partial_paid',	'Notes',	'2020-02-01 12:31:12'),
 (54,	1,	1,	'sale',	4,	'INVOICE51',	5600.00,	180.00,	1213.00,	6633.00,	1510.00,	6633.00,	'paid',	'',	'2020-02-01 12:32:34'),
 (62,	1,	1,	'sale',	1,	'INVOICE53',	1150.00,	0.00,	274.00,	1424.00,	850.00,	1425.00,	'paid',	'',	'2020-02-01 13:23:16'),
 (63,	1,	1,	'sale',	2,	'INVOICE54',	550.00,	2.00,	0.00,	548.00,	450.00,	100.00,	'partial_paid',	'',	'2020-02-01 15:18:56'),
@@ -227,4 +227,4 @@ INSERT INTO `users` (`id`, `client_id`, `user_name`, `type`, `password`, `email`
 (5,	4,	'Hemant',	'USER',	'hemant',	'hemant@test.com',	'7589648956',	0,	'2020-01-20 22:01:25'),
 (6,	4,	'Janardan',	'USER',	'janardan',	'janardan@test.com',	'8945697859',	0,	'2020-01-20 22:02:39');
 
--- 2020-02-03 05:32:09
+-- 2020-02-04 07:34:06

@@ -33,7 +33,7 @@
                 <?php if ($r['type'] == 'PAYMENT') : ?>
                     <tr>
                         <th><?php echo ++$i ?> </th>
-                        <td><?php echo $r['receipt_number'] ?></td>
+                        <td onclick="receipt_dtl(<?php echo $r['id'] ?>)" style="cursor: pointer; color: #337ab7;"><?php echo $r['receipt_number'] ?></td>
                         <td><?php echo $r['name'] ?></td>
                         <td style="width: 250px;"><?php echo $r['created'] ?></td>
                         <td style="width: 150px;"><?php echo $r['amt'] ?></td>

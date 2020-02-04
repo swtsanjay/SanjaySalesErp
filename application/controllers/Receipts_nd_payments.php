@@ -28,6 +28,12 @@ class Receipts_nd_payments extends MY_Controller
         json_data(['msg' => $msg]);
     }
 
+    function receipt_dtl($id){
+        $dtl = $this->user->receipt_dtl($id);
+        $html = $this->load->view('pages/popups/receipt_dtl', ['data' => $dtl], true );
+        json_data(['html' => $html]);
+    }
+
     function layout($page, $data){
         $data['page'] = $page;
         $this->load->view('layout', $data);

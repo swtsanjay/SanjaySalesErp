@@ -14,3 +14,11 @@
         <?php $this->load->view('pages/payments') ?>
     </div>
 </div>
+
+
+<div class="modal fade" id="receipt_dtl_modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+        </div>
+    </div>
+</div>

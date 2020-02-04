@@ -115,8 +115,15 @@ class Invoices extends MY_Controller {
         json_data($res);
     }
 
+    function invoice_dtl_show($id){
+        $dtl = $this->user->get_invoivce_items($id);
+        $html = $this->load->view('pages/popups/invoice_dtl', ['data' => $dtl], true );
+        json_data(['html' => $html]);
+    }
+
 	function layout($page, $data){
 		$data['page']= $page;
 		$this->load->view('layout', $data);
-	}
+    }
+    
 }

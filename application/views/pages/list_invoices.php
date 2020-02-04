@@ -45,3 +45,11 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="invoice_dtl_model" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
