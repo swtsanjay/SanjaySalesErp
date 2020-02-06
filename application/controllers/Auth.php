@@ -11,7 +11,12 @@ class Auth extends CI_Controller {
 	public function index()	{
         $post=$this->input->post();
         if( $_SESSION['dtl'] ){
-            redirect(URL.'/dashboard');
+            if($_SESSION['dtl'][0]['id'] == $_SESSION['dtl'][0]['client_id']){
+                redirect(URL.'/dashboard');
+            }
+            else{
+                redirect(URL.'invoices/load_invoices');
+            }
         }
 		if($post){
 			

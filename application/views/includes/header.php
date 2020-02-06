@@ -9,9 +9,12 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <?php //pr($_SESSION) ?>
+            <?php if($_SESSION['dtl'][0]['id'] == $_SESSION['dtl'][0]['client_id']):  ?>
             <li class="nav-item active">
                 <a class="nav-link" href="index.php/dashboard">Dashboard <span class="sr-only">(current)</span></a>
             </li>
+            <?php endif ?>
             <li class="nav-item">
                 <a class="nav-link" href="index.php/invoices/load_invoices">Invoices & Bills</a>
             </li>
@@ -24,9 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php/receipts_nd_payments">Receipts & Payments</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="index.php/user/stock">Stock</a>
-            </li>
+            </li> -->
 
             
         </ul>
