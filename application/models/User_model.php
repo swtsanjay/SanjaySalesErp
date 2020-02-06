@@ -370,9 +370,9 @@ class User_model extends CI_Model
     function this_month(){
         $year = date("Y");
         $month = date("n");
-        $sql = "SELECT SUM(grand_total) sale, YEAR(created), MONTH(created) FROM invoices WHERE YEAR(created) = $year AND MONTH(created) = $month AND type = 'sale' GROUP BY YEAR(created), MONTH(created)";
+        $sql = "SELECT SUM(grand_total) sale, YEAR(created), MONTH(created) FROM invoices WHERE YEAR(created) = $year AND MONTH(created) = $month AND type = 'sale' AND client_id =".CLIENT_ID." GROUP BY YEAR(created), MONTH(created)";
         $sale =$this->db->query($sql)->row_array();
-        $sql = "SELECT SUM(grand_total) purchase, YEAR(created), MONTH(created) FROM invoices WHERE YEAR(created) = $year AND MONTH(created) = $month AND type = 'purchase' GROUP BY YEAR(created), MONTH(created)";
+        $sql = "SELECT SUM(grand_total) purchase, YEAR(created), MONTH(created) FROM invoices WHERE YEAR(created) = $year AND MONTH(created) = $month AND type = 'purchase' AND client_id =".CLIENT_ID." GROUP BY YEAR(created), MONTH(created)";
         $purchase =$this->db->query($sql)->row_array();
         $data['sale'] = $sale['sale'];
         $data['purchase'] = $purchase['purchase'];
