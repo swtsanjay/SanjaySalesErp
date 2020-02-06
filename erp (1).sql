@@ -227,4 +227,4 @@ INSERT INTO `users` (`id`, `client_id`, `user_name`, `type`, `password`, `email`
 (5,	4,	'Hemant',	'USER',	'hemant',	'hemant@test.com',	'7589648956',	0,	'2020-01-20 22:01:25'),
 (6,	4,	'Janardan',	'USER',	'janardan',	'janardan@test.com',	'8945697859',	0,	'2020-01-20 22:02:39');
 
--- 2020-02-04 07:34:06
+-- 2020-02-04 07:34:06  
