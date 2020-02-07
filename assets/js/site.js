@@ -447,14 +447,14 @@ function sales_report(type = '') {
 
 function show_sales_graph(data, graph_name) {
 
-    // if(graph_name.includes("sale")){
-    //     alert('Sale');
-    //     am4core.useTheme(am4themes_dataviz); 
-    // }
-    // if(graph_name.includes("purchase")){
-    //     alert('purchase');
-    //     am4core.useTheme(am4themes_material); 
-    // }
+    if(graph_name.includes("sale")){
+        // alert('Sale');
+        //am4core.useTheme(am4themes_dataviz); 
+    }
+    if(graph_name.includes("purchase")){
+        // alert('purchase');
+        //am4core.useTheme(am4themes_material); 
+    }
 
     am4core.useTheme(am4themes_animated); 
     var chart = am4core.create(graph_name, am4charts.XYChart);
