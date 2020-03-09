@@ -181,7 +181,7 @@ function invoice_dtl(id) {
             type = '';
             $("#invoice_dtl_model .modal-content").html(res.html);
             $("#invoice_dtl_model").modal();
-            invoice_dtl_tdisc = 0.00; invoice_dtl_tgst = 0; invoice_dtl_tamt = 0;
+                invoice_dtl_tdisc = 0.00; invoice_dtl_tgst = 0; invoice_dtl_tamt = 0;
             $('.invoice_dtl_amts').each(function () {
                 invoice_dtl_tdisc += $(this).find('#invoice_dtl_disc').html() * 1;
                 invoice_dtl_tgst += $(this).find('#invoice_dtl_gst').html() * 1;

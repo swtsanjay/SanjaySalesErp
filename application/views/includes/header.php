@@ -36,15 +36,12 @@
         <form class="form-inline my-2 my-lg-0 text-white">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                        Welcome <?php echo $_SESSION['dtl'][0]['user_name']?>&emsp14;
+                    <a class="nav-link d-inline-block" href="index.php/my_profile">
+                        Welcome <?php echo $_SESSION['dtl'][0]['name']?>&emsp14;
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">Stock</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
-                    </div>
+                    <a class="nav-link d-inline-block " href="index.php/logout" style="color: red;">
+                        <i class="fa fa-power-off"></i> Logout
+                    </a>
                 </li>
             </ul>
         </form>

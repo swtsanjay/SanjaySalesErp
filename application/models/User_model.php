@@ -379,6 +379,20 @@ class User_model extends CI_Model
         $data['profit'] = $sale['sale'] - $purchase['purchase'];
         return $data;
     }
+
+    function get_user_dtl($id){
+        $rs = $this->db->get_where('users', ['id'=>$id])->result_array();
+        return $rs[0];
+    }
+
+    function update_profile($data, $id){
+        $this->db->update('users', $data, ['id'=>$id]);
+        return $this->db->affected_rows();
+    }
+
+    function check_user($u_name){
+        return $this->db->get_where('users', ['user_name'=>$u_name])->result_array();
+    }
 }
 
 // EOF
