@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
             }
         }
 		if($post){
-			
+			$data['page_title'] = "Login";
 			if($post['username'] == null && $post['password'] ==null ){
 				$data['error'] = true;
 				$data['name_error'] = "User name required";
@@ -35,7 +35,7 @@ class Auth extends CI_Controller {
 					$data['pass_error'] = "Password didn't match";
 				}else{
 					$this->session->set_userdata(['dtl'=>$res ]);
-					redirect(URL.'/dashboard');
+					redirect(URL.'dashboard');
 				}
 			}
 			

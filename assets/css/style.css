@@ -91,8 +91,20 @@
     color: red;
 }
 
+.footer{
+    position: fixed;    bottom: 0px;    text-align: center; width: 100%;    background-color: #9da9b3;
+}
+
 .part_paid {
     color: palegreen;
+}
+
+.show-alert{
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%);
+    z-index: 2000;
 }
 
 .invoice-no {

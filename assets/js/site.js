@@ -21,11 +21,15 @@ function save_item() {
         data: $("#item_form").serialize(),
         dataType: 'JSON',
         success: function (res) {
-            alert(res.msg);
+            // if()
+            // alert(res.msg);
             if (res.success) {
+                show_alert(res.msg);
                 $("#item_form_modal").modal('hide');
                 if (page_reload)
                     location.reload();
+            } else{
+                show_alert(res.msg, 'danger');
             }
         }
     });
@@ -37,7 +41,7 @@ function item_delete(id) {
             url: API_URL + 'items/item_delete/' + id,
             dataType: 'JSON',
             success: function (res) {
-                alert(res.msg);
+                show_alert(res.msg, 'danger');
                 location.reload();
             }
         });
@@ -49,7 +53,6 @@ function open_party_form(id) {
         url: API_URL + 'parties/party_dtl/' + id,
         dataType: 'JSON',
         success: function (res) {
-            000000
             $("#party_form_modal .modal-content").html(res.html);
             $("#party_form_modal").modal();
         }
@@ -63,12 +66,15 @@ function save_party() {
         data: $('#party_form').serialize(),
         dataType: 'JSON',
         success: function (res) {
-            alert(res.msg);
             if (res.success) {
+                show_alert(res.msg);
                 $('#party_form_modal').modal('hide');
                 if (page_reload)
                     location.reload();
+            }else{
+                show_alert(res.msg, 'danger');
             }
+
         }
     });
 }
@@ -79,7 +85,8 @@ function delete_party(id) {
             url: API_URL + 'parties/delete_party/' + id,
             dataType: 'JSON',
             success: function (res) {
-                alert(res.msg);
+                // alert(res.msg);
+                show_alert(res.msg, 'danger');
                 location.reload();
             }
         });
@@ -116,10 +123,13 @@ function save_invoice() {
         data: $('#invoice_form').serialize(),
         dataType: 'JSON',
         success: function (res) {
-            alert(res.msg);
+            // alert(res.msg);
             if (res.success) {
+                show_alert(res.msg);
                 $('#invoice_form_modal').modal('hide');
                 location.reload();
+            } else{
+                show_alert(res.msg, 'danger');
             }
         }
     });
@@ -131,7 +141,8 @@ function delete_invoice(id) {
             url: API_URL + 'invoices/delete_invoice/' + id,
             dataType: 'JSON',
             success: function (res) {
-                alert(res.msg);
+                // alert(res.msg);
+                show_alert(res.msg, 'danger');
                 location.reload();
             }
         });
@@ -144,7 +155,8 @@ function delete_receipt_payment(id) {
             url: API_URL + 'receipts_nd_payments/delete_receipt_payment/' + id,
             dataType: 'JSON',
             success: function (res) {
-                alert(res.msg);
+                // alert(res.msg);
+                show_alert(res.msg, 'danger');
                 location.reload();
             }
         });
@@ -342,10 +354,13 @@ function save_payment() {
         data: $('#record_payment').serialize(),
         dataType: 'JSON',
         success: function (res) {
-            alert(res.msg);
+            // alert(res.msg);
             if (res.success) {
+                show_alert(res.msg);
                 $('#record_payment_form_modal').modal('hide');
                 location.reload();
+            } else{
+                show_alert(res.msg, 'danger');
             }
         }
     });
@@ -385,7 +400,7 @@ function add_table_item() {
         id = $(this).attr('value');
         console.log(id);
         if ($('#item_id').val() == id) {
-            alert("Item is already selectyed");
+            alert("Item is already selected");
             flag = true;
         }
     });
@@ -441,6 +456,37 @@ function sales_report(type = '') {
                 show_sales_graph(data, 'purchase_report_graph');
             if(type == 'profit')
                 show_sales_graph(data, 'profit_report_graph');
+        }
+    });
+}
+
+function open_user_form(user_id){
+    $.ajax({
+        url: API_URL + 'users/user_dtl/' + user_id,
+        dataType: 'JSON',
+        success: function (res) {
+            $("#user_form_modal .modal-content").html(res.html);
+            $("#user_form_modal").modal();
+        }
+    });
+}
+
+function save_user(){
+    $.ajax({
+        url: API_URL + 'users/save_user',
+        type: 'POST',
+        data: $("#user_form").serialize(),
+        dataType: 'JSON',
+        success: function (res) {
+            // alert(res.msg);
+            if (res.success) {
+                show_alert(res.msg);
+                $("#user_form_modal").modal('hide');
+                if (page_reload)
+                    location.reload();
+            } else{
+                show_alert(res.msg, 'danger');
+            }
         }
     });
 }
@@ -524,6 +570,18 @@ $("#dashboard_profit_user, #dashboard_profit_party, #dashboard_profit_year").cha
         }
     });
 });
+
+function show_alert(msg, type){
+    type = type?type:'success';
+    var dv = `<div class="alert alert-${type} show-alert w-25 shadow"><button type="button" class="close" data-dismiss="alert">
+            &times;</button> ${msg} </div>`;
+    $('body').prepend(dv);
+    setTimeout(function(){
+        $(".show-alert").hide();
+    }, 5000);
+}
+
+
 sales_report();
 sales_report('purchase');
 sales_report('profit');

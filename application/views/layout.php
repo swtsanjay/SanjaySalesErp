@@ -4,7 +4,7 @@
     <base href="<?php echo ROOT_URL;?>">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css?<?php echo time()?>">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/jquery.js"></script>
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    
+    <?php $this->load->view("includes/footer")?>
 
     <script src="assets/js/jquery.js"></script>
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -30,12 +30,16 @@
     <link href="assets/css/select2.min.css" rel="stylesheet">
     <script src="assets/js/select2.min.js"></script>
     
-    <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="assets/js/site.js?<?php echo time()?>"></script>
+    <!-- <script src="https://www.amcharts.com/lib/4/core.js"></script> -->
+    <!-- <script src="https://www.amcharts.com/lib/4/charts.js"></script> -->
+    <!-- <script src="https://www.amcharts.com/lib/4/themes/material.js"></script> -->
+    <!-- <script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script> -->
+    <!-- <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script> -->
+    <script src="assets/js/amchart_core.js"></script>
+    <script src="assets/js/amchart_charts.js"></script>
+    <script src="assets/js/amchart_animated.js"></script>
+    <script src="assets/js/site.js"></script>
+    <!-- <script>msg_alert(jhdkhdjkhdjk)</script> -->
 </body>
 
 </html>

@@ -15,6 +15,7 @@ class My_profile extends MY_Controller {
 
 	
     function index(){
+        $data['page_title'] = "My Profile";
         $data['dtl'] = $this->user->get_user_dtl(USER_ID);
 		$this->layout('pages/my_profile', $data);
     }
@@ -34,6 +35,7 @@ class My_profile extends MY_Controller {
             if($CLIENT_USER_ID == $post['user_name'] || !$this->user->check_user($post['user_name'])){
                 $this->user->update_profile($post, USER_ID);
                 $CLIENT_USER_ID = $post['user_name'];
+                $data['msg'] = 'Saved successfully';
             } else{
                 $err['user_name_msg'] = "User id already exists";
             }

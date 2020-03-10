@@ -11,6 +11,7 @@ class Invoices extends MY_Controller {
 	}
 
 	function load_invoices(){
+        $data['page_title'] = "Invoices & Bills";
         $rs = $this->user->list_invoices();
         $data['dt'] = $rs;
         // pr($data['dt']);

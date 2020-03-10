@@ -1,10 +1,6 @@
-<?php if($_GET): ?>
-    <script>
-        msg = '<?php echo($_GET['msg']) ?>';
-        alert(msg);
-    </script>
+<?php if($msg): ?>
+<script>$(function(){show_alert('<?php echo $msg ?>')})</script>
 <?php endif ?>
-
 <div class="container " style="width: 800px; margin-bottom: 200px;">
     <form class="bg-white p-5 mb-lg-51" action="index.php/my_profile/save_profile" method="POST">
         <div class="form-row">

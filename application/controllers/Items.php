@@ -15,8 +15,8 @@ class Items extends CI_Controller
     }
 
 
-    function load_items()
-    {
+    function load_items(){
+        $data['page_title'] = "Items";
         $post = $this->input->post();
         $key = $post['key'];
         $type = $post['type'];
@@ -46,25 +46,25 @@ class Items extends CI_Controller
 
     function save_item(){
         $post = $this->input->post();
-        $res = ['success' => false, 'errors' => [], 'msg' => 'error!'];
+        $res = ['success' => false, 'errors' => '', 'msg' => 'error!'];
 
         if (!$post['type']) {
-            $res['errors']['type'] = "Item type is required!";
+            $res['errors'] .= "Item type, ";
         }
         if (!$post['name']) {
-            $res['errors']['name'] = "Item name is required!";
+            $res['errors'] .= "Item name, ";
         }
         if (!$post['item_code']) {
-            $res['errors']['item_code'] = "Item code is required!";
+            $res['errors'] .= "Item code, ";
         }
         if (!$post['unit_cost']) {
-            $res['errors']['unit_cost'] = "Item unit cost is required!";
+            $res['errors'] .= "Item unit cost, ";
         }
         if (!$post['sale_cost']) {
-            $res['errors']['sale_cost'] = "Item sale cost is required!";
+            $res['errors'] .= "Item sale cost, ";
         }
         if (!$post['status']) {
-            $res['errors']['status'] = "Item status is required!";
+            $res['errors'] .= "Item status, ";
         }
 
         if (!$res['errors']) {
@@ -79,7 +79,7 @@ class Items extends CI_Controller
                 $res['msg'] = "Item saved successfully";
             }
         } else {
-            $res['msg'] = implode("\n", array_values($res['errors']));
+            $res['msg'] = rtrim($res['errors'], ', ').' required!!!';
         }
 
         json_data($res);

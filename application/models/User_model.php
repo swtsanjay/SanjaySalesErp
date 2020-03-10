@@ -11,9 +11,11 @@ class User_model extends CI_Model
 
     function validate_user($name, $password)
     {
-        $sql = "SELECT * FROM users WHERE user_name = '" . $name . "' AND password = '" . $password . "' ";
-        $rs = $this->db->query($sql)->result_array();
-        return $rs;
+        // $sql = "SELECT * FROM users WHERE user_name = '" . $name . "' AND password = '" . $password . "' AND status = 1";
+        $rs = $this->db->get_where('users', ['user_name'=>$name, 'password'=>$password, 'status'=>'1'])->result_array();
+        // echo $this->db->last_query();
+        if($this->db->get_where('users', ['id'=>$rs[0]['client_id'], 'status'=>'1'])->result_array())
+            return $rs;
     }
 
     function list_invoices()
@@ -380,9 +382,25 @@ class User_model extends CI_Model
         return $data;
     }
 
-    function get_user_dtl($id){
-        $rs = $this->db->get_where('users', ['id'=>$id])->result_array();
-        return $rs[0];
+    function get_user_dtl($id=''){
+        if($id){
+            $rs = $this->db->get_where('users', ['id'=>$id])->result_array();
+            return $rs[0];
+        } else{
+            $rs = $this->db->get_where('users', ['client_id'=>CLIENT_ID])->result_array();
+            return $rs;
+        }
+    }
+
+    function save_user($data){
+        if($data['id']){
+            $this->db->update('users', $data, ['id'=>$data['id']]);
+            return $data['id'];
+        } else{
+            $data['created'] = date('Y-m-d H:i:s');
+            $this->db->insert('users', $data);
+            return $this->db->insert_id();
+        }
     }
 
     function update_profile($data, $id){
@@ -390,8 +408,32 @@ class User_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-    function check_user($u_name){
-        return $this->db->get_where('users', ['user_name'=>$u_name])->result_array();
+    function check_user($u_name, $id = 0){
+        if(!$id){
+            return $this->db->get_where('users', ['user_name'=>$u_name])->result_array();
+        } else{
+            return $this->db->get_where('users', ['id'=>$id])->result_array();
+        }
+    }
+
+    function get_client_dtl($id = ''){
+        if($id){
+            $rs = $this->db->get_where('users', ['id'=>$id])->result_array();
+            return $rs[0];
+        } else{
+            $rs = $this->db->get_where('users', ['type'=>'CLIENT'])->result_array();
+            return $rs;
+        }
+    }
+
+    function validate_admin($data){
+        $rs = $this->db->get_where('admin', ['name'=>$data['username'], 'password'=>$data['password']])->result_array();
+        if($rs){
+            $this->session->set_userdata(['admin'=>$rs ]);
+            pr($this->session);
+            return true;
+        }
+        return false;
     }
 }
 

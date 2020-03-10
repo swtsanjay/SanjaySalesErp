@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <a class="navbar-brand" href="index.php/dashboard">
-        <img src="assets/img/bootstrap-solid.svg" width="30" height="30" alt="">
+        <img src="assets/img/logo.png" width="30" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php/receipts_nd_payments">Receipts & Payments</a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="index.php/user/stock">Stock</a>
-            </li> -->
-
+            <?php if($_SESSION['dtl'][0]['id'] == $_SESSION['dtl'][0]['client_id']):  ?>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php/users">Users</a>
+            </li>
+            <?php endif ?>
             
         </ul>
         <form class="form-inline my-2 my-lg-0 text-white">

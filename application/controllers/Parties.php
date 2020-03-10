@@ -11,6 +11,7 @@ class Parties extends MY_Controller
         }
     }
     function load_parties(){
+        $data['page_title'] = "Parties";
         $rs = $this->user->list_parties();
             $data['dt'] = $rs;
             $this->layout('pages/list_parties', $data);
@@ -28,15 +29,15 @@ class Parties extends MY_Controller
     }
     function save_party(){
         $post = $this->input->post();
-        $res = ['success' => false, 'errors' => [], 'msg' => 'error!'];
+        $res = ['success' => false, 'errors' => '', 'msg' => 'error!'];
         if (!$post['type']) {
-            $res['errors']['type'] = "Party type is required!";
+            $res['errors'] .= "Party type, ";
         }
         if (!$post['name']) {
-            $res['errors']['name'] = "Party name is required!";
+            $res['errors'] .= "Party name, ";
         }
         if (!$post['mobile']) {
-            $res['errors']['mobile'] = "Mobile no. is required!";
+            $res['errors'] .= "Mobile no., ";
         }
 
         if ( !$res['errors'] ) {
@@ -50,7 +51,7 @@ class Parties extends MY_Controller
                 $res['msg'] = "Party saved successfully";
             }
         } else {
-            $res['msg'] = implode("\n", array_values($res['errors']));
+            $res['msg'] = rtrim($res['errors'], ', ').' required';
         }
         json_data($res);
     }
