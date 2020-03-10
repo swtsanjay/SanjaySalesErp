@@ -19,7 +19,7 @@
                 <th style="width: 150px;">Email</th>
                 <th style="width: 150px;">Mobile</th>
                 <th style="width: 100px;">Status</th>
-                <th style="width: 100px;">Created</th>
+                <th style="width: 200px;">Created</th>
                 <th style="width: 85px;"></th>
             </tr>
         </thead>

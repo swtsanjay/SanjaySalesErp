@@ -11,7 +11,7 @@
 <body class="bg">
     <div class="container-fluid p-0">
         <div class="align-content-center d-flex">
-            <div class=" rounded-lg w-360 bg-white p-4 flex-m-a ">
+            <div class=" rounded-lg w-360 bg-white p-4 ml-auto mr-auto mt-5 ">
 
                 <form action="" method="post">
                     <input type="hidden" value="test" name="test">

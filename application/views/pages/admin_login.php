@@ -11,7 +11,7 @@
 <body>
     <div class="container-fluid p-0">
         <div class="align-content-center d-flex">
-            <div class=" rounded-lg w-360 bg-white border p-4 ml-auto mr-auto mt-5 border-info">
+            <div class="w-360 bg-white border p-4 ml-auto mr-auto mt-5 border-info rounded-0">
                 <form action="" method="post">
                     <div class="text-center f-s-25 text-dark1 pb-3 text-info">Saleserp Admin Panel</div>
                     <div class="input-group mb-3 ">
