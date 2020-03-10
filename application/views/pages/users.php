@@ -16,7 +16,7 @@
                 <th>Name</th>
                 <th style="width: 250px;">User Id</th>
                 <th style="width: 150px;">Password</th>
-                <th style="width: 150px;">Email</th>
+                <th style="width: 200px;">Email</th>
                 <th style="width: 150px;">Mobile</th>
                 <th style="width: 100px;">Status</th>
                 <th style="width: 200px;">Created</th>
